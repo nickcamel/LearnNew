@@ -1,6 +1,8 @@
 #ifndef LEARNNEW_H_INCLUDED
 #define LEARNNEW_H_INCLUDED
 
+#include "defines.h"
+
 class LearnNew {
 
 public:
@@ -11,14 +13,14 @@ public:
     void learn_new_stuff();
     void print_all_knowledge();
 
-    char name[32];
+    char name[N_CHAR_MAX];
 
 private:
 
     // Properties struct
     struct MyProps {
         MyProps():next(0) {}
-        char attr[32];
+        char attr[N_CHAR_MAX];
         struct MyProps * next;
     } * props;
 

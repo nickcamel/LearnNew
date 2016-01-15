@@ -1,8 +1,16 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
-void learn_new_stuff();
-void print_all_knowledge();
+#include "defines.h"
+#include "LearnNew.h"
+
+
+
+
+// Declare an array of object to learn
+LearnNew obj[N_OF_OBJECTS];
+
+
 
 
 
