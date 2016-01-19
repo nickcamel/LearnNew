@@ -17,15 +17,11 @@ int main()
         // Get object name
         char arr[N_CHAR_MAX];
 		
-		// TODO: Look in to this below.
-		// It works, but it looks kind of wierd.
-		// The idea is to ignore pure enter key, i.e we do not
-		// want to process the input if only enter key was pressed.
-		// We cant just use cin >> arr since we want to include white spaces.
-		cin.getline(arr, N_CHAR_MAX);
-		while (arr[0]==0)
+		// Avoid processing pure enter key and space key
+		do {
 			cin.getline(arr, N_CHAR_MAX);
-		
+		} while (arr[0]==0 || arr[0]==32);
+
 		// Check if object exist.
 		// We dont want to create a duplicate!
 		bool obj_exist = false;

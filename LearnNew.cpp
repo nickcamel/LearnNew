@@ -15,6 +15,8 @@ LearnNew::~LearnNew(){}
 
 void LearnNew::learn(char * newAttr, MyProps * in_thing) {
 
+	// Create a new 'next' and learn the new attribute
+	
     in_thing->next = new MyProps;
 
     strncpy(in_thing->attr, newAttr, N_CHAR_MAX);
@@ -32,22 +34,24 @@ void LearnNew::learn_new_stuff() {
 	
 	// Char pointer for assigning attribute to object
     char *tmp;
-
 	
     other = props;
 
-	while (other->next!=NULL) {
-		other = other->next;
-	}
+	cin.getline(arr, N_CHAR_MAX);
 	
-    //for (int k=0; k<2; k++) {
-        cin.getline(arr, N_CHAR_MAX);
-        tmp = arr;
-        learn(tmp, other);
-
-     //   other = other->next;
-
-    //}
+	// If enter key or space key was pressed, don't learn it, move on...
+	if (arr[0]!=0 && arr[0]!=32) {
+		
+		// Move pointer to end
+		while (other->next!=NULL) {
+			other = other->next;
+		}
+		
+		tmp = arr;
+    
+		// Learn the new attribute
+		learn(tmp, other);
+	}
 
 
 }
