@@ -32,8 +32,6 @@ int LearnNew::learn_new_stuff(char *ret_char) {
 	// Char array for user input
     char arr[N_CHAR_MAX];
 	
-	// Char pointer for assigning attribute to object
-    char *tmp;
 	
     other = props;
 
@@ -49,18 +47,18 @@ int LearnNew::learn_new_stuff(char *ret_char) {
 			other = other->next;
 		}
 		
-		tmp = arr;
+		// We need to copy for the pointer to hold when returning.
+		// "ret_char = arr" is no good, since arr will die at end of this method. 
+		strcpy(ret_char, arr);
     
 		// Learn the new attribute
-		learn(tmp, other);
+		learn(ret_char, other);
 		
-		strcpy(ret_char, arr);
-		
+		// Ok
 		return 0;
 	}
-
 	
-	
+	// Nothing new was learned
 	return 1;
 
 }
