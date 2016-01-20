@@ -10,7 +10,7 @@ public:
     LearnNew();
     virtual ~LearnNew();
 
-    void learn_new_stuff();
+    int learn_new_stuff(char*);
     void print_all_knowledge();
 
     char name[N_CHAR_MAX];

@@ -25,7 +25,7 @@ int main()
 		// Check if object exist.
 		// We dont want to create a duplicate!
 		bool obj_exist = false;
-		for (int k=0; k<N_CHAR_MAX; k++){
+		for (int k=0; k<N_OF_OBJECTS; k++){
 			if (strcmp(obj[k].name, arr)==0) {
 				obj_exist = true;
 				i = k;
@@ -39,7 +39,19 @@ int main()
 		}
 
         // Learn new stuff about object
-        obj[i].learn_new_stuff();
+        char attr_tmp[N_CHAR_MAX];
+		
+		if (obj[i].learn_new_stuff(attr_tmp)==0) {
+			// Browse to make a connection
+			printf("->dev-> new stuff : %s\n", attr_tmp);
+		} else {
+			// We didnt learn anything new
+			printf("->dev-> what else is new?\n");
+		}
+		
+		
+		
+		
 
         // Print everything we know about object
         obj[i].print_all_knowledge();

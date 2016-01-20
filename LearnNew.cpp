@@ -24,8 +24,8 @@ void LearnNew::learn(char * newAttr, MyProps * in_thing) {
 }
 
 
-void LearnNew::learn_new_stuff() {
-
+int LearnNew::learn_new_stuff(char *ret_char) {
+	
 	// Create a pointer for iteration purpose
     LearnNew::MyProps * other;
 	
@@ -40,6 +40,8 @@ void LearnNew::learn_new_stuff() {
 	cin.getline(arr, N_CHAR_MAX);
 	
 	// If enter key or space key was pressed, don't learn it, move on...
+	
+	
 	if (arr[0]!=0 && arr[0]!=32) {
 		
 		// Move pointer to end
@@ -51,8 +53,15 @@ void LearnNew::learn_new_stuff() {
     
 		// Learn the new attribute
 		learn(tmp, other);
+		
+		strcpy(ret_char, arr);
+		
+		return 0;
 	}
 
+	
+	
+	return 1;
 
 }
 
