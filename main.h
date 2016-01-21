@@ -18,7 +18,7 @@ void create_object(char*);
 // * mostly used in general
 void sort_recent();
 
-// Number of initalized objects
+// Number of initalized objects 
 int n_obj = 0;
 
 // Object index
