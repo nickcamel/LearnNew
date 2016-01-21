@@ -9,9 +9,6 @@ using namespace std;
 
 int main()
 {
-    // Object index
-    //int i = 0;
-
     while (true) {
 
         // Get object name
@@ -26,57 +23,57 @@ int main()
 		// We dont want to create a duplicate!
 		create_object(arr);
 		
-        // Learn new stuff about object
+        // Learn new stuff about object.
+		// Here we add an attribute to current object.
+		// Thereafter we create a new object using the attribute and it's
+		// attribute will be the original object. So an attribute to an object
+		// goes both ways.
+		// Obj A w. attr B ==> Obj B w. attr A
         char attr_tmp[N_CHAR_MAX];
-		
+				
 		if (obj[i].learn_new_stuff(attr_tmp, 1)==0) {
-			//i = next_i;
+			
 			create_object(attr_tmp);
 			
 			obj[i].learn_new_stuff(arr, 0);
 			
-			// Browse to make a connection
-			//printf("->dev-> new stuff : %s\n", attr_tmp);
+			
 		} else {
 			// We didnt learn anything new
+			// Just print the object
 			obj[i].print_all_knowledge();
-			//printf("->dev-> what else is new?\n");
+			
 		}
 		
 		
-		
-		
-
-        // Print everything we know about object
-        //;
-
-        // Increment
-        //i++;
     }
     return 0;
 }
 
 
-bool create_object(char * arr) {
+void create_object(char * arr) {
 	
 	bool obj_exist = false;
 	
+	//need a clever way of making closer/longer bonds!
 	
-	//error! here we need to follow each attr pointer
-	//also need a clever way of making closer/longer bonds!
-	
+	// Check if object 'arr' already exist
 	for (int k=0; k<N_OF_OBJECTS; k++){
 		if (strcmp(obj[k].name, arr)==0) {
+			// It does exist. Mark 'i' to current object and break out
 			obj_exist = true;
 			i = k;
 			break;
 		}
 	}
 	
+	// If object 'arr' does not exist, find an
+	// uninitialized object
 	if (obj_exist==false) {
-		// Find empty object
+		
 		for (int k=0; k<N_OF_OBJECTS; k++){
 			if (obj[k].is_alive==0) {
+				// An empty object was found. Mark 'i' and break out
 				i = k;
 				break;
 			}
@@ -84,10 +81,12 @@ bool create_object(char * arr) {
 		
 		// Name the object
 		strncpy(obj[i].name, arr, N_CHAR_MAX);
+		
+		// Mark it alive
 		obj[i].is_alive = 1;
 	}
 	
-	return obj_exist;
+	
 }
 
 

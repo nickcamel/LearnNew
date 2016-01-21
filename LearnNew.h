@@ -15,18 +15,17 @@ public:
 
     char name[N_CHAR_MAX];
 
+	
+	int is_alive;
 
-
-    // Properties struct
+private:
+	// Properties struct
     struct MyProps {
         MyProps():next(0) {}
         char attr[N_CHAR_MAX];
         struct MyProps * next;
     } * props;
 	
-	int is_alive;
-
-private:
     void learn(char * newAttr, MyProps * inthing);
 
 

@@ -34,16 +34,16 @@ int LearnNew::learn_new_stuff(char *ret_char, int usr_in) {
 	// Char array for user input
     char arr[N_CHAR_MAX];
 	
+	// Either we are using users input for learning
+	// or we are learning from the object of which we are an 
+	// attribute to
 	if (usr_in==1) {
 		cin.getline(arr, N_CHAR_MAX);
-		
 	} else {
 		strcpy(arr, ret_char);
 	}
 	
 	// If enter key or space key was pressed, don't learn it, move on...
-	
-	
 	if (arr[0]!=0 && arr[0]!=32) {
 		
 		// Move pointer to end
