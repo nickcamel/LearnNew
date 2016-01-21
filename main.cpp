@@ -9,8 +9,16 @@ using namespace std;
 
 int main()
 {
-    while (true) {
-
+    while (n_obj<N_OF_OBJECTS) {
+		// We need a main loop in here where cpu is being creative
+		// E.g it combines or generates 3 new object with links
+		// Afterwards if we approve, it stores, else disregards
+		
+		// main_loop_here()
+		
+		// When ready for user input
+		// go to here
+		
         // Get object name
         char arr[N_CHAR_MAX];
 		
@@ -48,6 +56,10 @@ int main()
 		
 		
     }
+	
+	cout << "Out of memory!" << endl;
+	printf("Max number of objects exceeded\n");
+	printf("Allowed %d  Created %d\n", N_OF_OBJECTS, n_obj);
     return 0;
 }
 
@@ -85,6 +97,9 @@ void create_object(char * arr) {
 		
 		// Mark it alive
 		obj[i].is_alive = 1;
+		
+		// N of objects
+		n_obj++;
 	}
 	
 	

@@ -13,6 +13,9 @@ LearnNew obj[N_OF_OBJECTS];
 // Create objects
 void create_object(char*);
 
+// Number of initalized objects
+int n_obj = 0;
+
 // Object index
 int i = 0;
 

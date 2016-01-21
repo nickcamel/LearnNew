@@ -1,7 +1,7 @@
 #ifndef DEFINES_H_INCLUDED
 #define DEFINES_H_INCLUDED
 
-#define N_OF_OBJECTS 30
+#define N_OF_OBJECTS 50
 #define N_CHAR_MAX 32
 
 
