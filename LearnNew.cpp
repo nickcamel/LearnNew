@@ -24,18 +24,21 @@ void LearnNew::learn(char * newAttr, MyProps * in_thing) {
 }
 
 
-int LearnNew::learn_new_stuff(char *ret_char) {
+int LearnNew::learn_new_stuff(char *ret_char, int usr_in) {
 	
 	// Create a pointer for iteration purpose
     LearnNew::MyProps * other;
+	other = props;
 	
 	// Char array for user input
     char arr[N_CHAR_MAX];
 	
-	
-    other = props;
-
-	cin.getline(arr, N_CHAR_MAX);
+	if (usr_in==1) {
+		cin.getline(arr, N_CHAR_MAX);
+		
+	} else {
+		strcpy(arr, ret_char);
+	}
 	
 	// If enter key or space key was pressed, don't learn it, move on...
 	

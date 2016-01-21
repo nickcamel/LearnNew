@@ -10,7 +10,8 @@
 // Declare an array of object to learn
 LearnNew obj[N_OF_OBJECTS];
 
-
+void create_object(char*);
+int i = 0;
 
 
 

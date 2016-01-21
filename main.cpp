@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     // Object index
-    int i = 0;
+    //int i = 0;
 
     while (true) {
 
@@ -24,29 +24,22 @@ int main()
 
 		// Check if object exist.
 		// We dont want to create a duplicate!
-		bool obj_exist = false;
-		for (int k=0; k<N_OF_OBJECTS; k++){
-			if (strcmp(obj[k].name, arr)==0) {
-				obj_exist = true;
-				i = k;
-				break;
-			}
-		}
-        
-		if (obj_exist==false) {
-			// Name the object
-			strncpy(obj[i].name, arr, N_CHAR_MAX);
-		}
-
+		create_object(arr);
+		
         // Learn new stuff about object
         char attr_tmp[N_CHAR_MAX];
 		
-		if (obj[i].learn_new_stuff(attr_tmp)==0) {
+		if (obj[i].learn_new_stuff(attr_tmp, 1)==0) {
+			create_object(attr_tmp);
+			
+			obj[i].learn_new_stuff(arr, 0);
+			
 			// Browse to make a connection
-			printf("->dev-> new stuff : %s\n", attr_tmp);
+			//printf("->dev-> new stuff : %s\n", attr_tmp);
 		} else {
 			// We didnt learn anything new
-			printf("->dev-> what else is new?\n");
+			obj[i].print_all_knowledge();
+			//printf("->dev-> what else is new?\n");
 		}
 		
 		
@@ -54,15 +47,35 @@ int main()
 		
 
         // Print everything we know about object
-        obj[i].print_all_knowledge();
+        //;
 
         // Increment
-        i++;
+        //i++;
     }
     return 0;
 }
 
 
-
+void create_object(char * arr) {
+	
+	bool obj_exist = false;
+	
+	
+	error! here we need to follow each attr pointer
+	also need a clever way of making closer/longer bonds!
+	
+	for (int k=0; k<N_OF_OBJECTS; k++){
+		if (strcmp(obj[k].name, arr)==0) {
+			obj_exist = true;
+			i = k;
+			break;
+		}
+	}
+	
+	if (obj_exist==false) {
+		// Name the object
+		strncpy(obj[++i].name, arr, N_CHAR_MAX);		
+	}
+}
 
 
