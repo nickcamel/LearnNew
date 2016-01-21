@@ -13,6 +13,11 @@ LearnNew obj[N_OF_OBJECTS];
 // Create objects
 void create_object(char*);
 
+// Sort attributes of object according to 
+// * most recently used
+// * mostly used in general
+void sort_recent();
+
 // Number of initalized objects
 int n_obj = 0;
 
