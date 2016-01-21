@@ -8,6 +8,7 @@ using namespace std;
 
 LearnNew::LearnNew(){
     props = new MyProps;
+	is_alive = 0;
 }
 
 LearnNew::~LearnNew(){}
