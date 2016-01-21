@@ -15,6 +15,7 @@ int main()
         char arr[N_CHAR_MAX];
 		
 		// Avoid processing pure enter key and space key
+		cout << "object: " << endl;
 		do {
 			cin.getline(arr, N_CHAR_MAX);
 		} while (arr[0]==0 || arr[0]==32);

@@ -38,6 +38,7 @@ int LearnNew::learn_new_stuff(char *ret_char, int usr_in) {
 	// or we are learning from the object of which we are an 
 	// attribute to
 	if (usr_in==1) {
+		cout << "attribute (or enter to print): " << endl;
 		cin.getline(arr, N_CHAR_MAX);
 	} else {
 		strcpy(arr, ret_char);
