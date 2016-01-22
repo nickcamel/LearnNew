@@ -111,6 +111,7 @@ void create_object(char * arr) {
 		
 		// Mark it alive
 		obj[i].is_alive = 1;
+		obj[i].rec?=P_AT_CREATION;
 		
 		// N of objects
 		n_obj++;
