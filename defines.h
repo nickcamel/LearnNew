@@ -3,6 +3,7 @@
 
 #define N_OF_OBJECTS 50
 #define N_CHAR_MAX 32
-
+#define P_AT_READING 1
+#define P_AT_LEARNING 3
 
 #endif // DEFINES_H_INCLUDED

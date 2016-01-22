@@ -9,6 +9,7 @@ using namespace std;
 LearnNew::LearnNew(){
     props = new MyProps;
 	is_alive = 0;
+	rec = 0;
 }
 
 LearnNew::~LearnNew(){}
@@ -21,6 +22,8 @@ void LearnNew::learn(char * newAttr, MyProps * in_thing) {
     in_thing->next = new MyProps;
 
     strncpy(in_thing->attr, newAttr, N_CHAR_MAX);
+	
+	in_thing->rec+=P_AT_LEARNING;
 
 }
 
@@ -40,6 +43,7 @@ int LearnNew::learn_new_stuff(char *ret_char, int usr_in) {
 	if (usr_in==1) {
 		cout << "attribute (or enter to print): " << endl;
 		cin.getline(arr, N_CHAR_MAX);
+		printf("\n");
 	} else {
 		strcpy(arr, ret_char);
 	}
@@ -79,6 +83,7 @@ void LearnNew::print_all_knowledge() {
 
         while (other->next!=NULL) {
             printf("%s\n", other->attr);
+			other->rec+=P_AT_READING;
             other = other->next;
 
         }

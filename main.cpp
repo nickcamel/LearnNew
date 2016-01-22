@@ -14,7 +14,11 @@ int main()
 		// E.g it combines or generates 3 new object with links
 		// Afterwards if we approve, it stores, else disregards
 		
-		// main_loop_here()
+		if (n_obj>4) {
+			// main_loop_here()
+			// Go to drawing conclusions
+		}
+		
 		
 		// When ready for user input
 		// go to here
@@ -28,6 +32,15 @@ int main()
 			cin.getline(arr, N_CHAR_MAX);
 		} while (arr[0]==0 || arr[0]==32);
 
+
+		
+		printf("\n");
+		//cout << "devtest"<<endl;
+		strcpy(arrint[c2i(arr)], arr);
+		//cout << arrint[c2i(arr)] <<endl;
+		//cout << "devtest end"<<endl;
+		//printf("\n");
+		
 		// Check if object exist.
 		// We dont want to create a duplicate!
 		create_object(arr);
@@ -45,12 +58,13 @@ int main()
 			create_object(attr_tmp);
 			
 			obj[i].learn_new_stuff(arr, 0);
-			
+			obj[i].rec+=P_AT_LEARNING;
 			
 		} else {
 			// We didnt learn anything new
 			// Just print the object
 			obj[i].print_all_knowledge();
+			obj[i].rec+=P_AT_READING;
 			
 		}
 		
@@ -108,4 +122,14 @@ void create_object(char * arr) {
 
 void sort_recent() {
 	
+}
+
+
+int c2i(char * charint) {
+	int ci = 0;
+	for (unsigned int k = 0; k<strlen(charint); k++) {
+		ci += (int) charint[k];
+	}
+	
+	return ci;
 }
