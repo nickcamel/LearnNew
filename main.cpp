@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
+#include <algorithm>
 
 
 #include "main.h"
@@ -11,14 +11,17 @@ using namespace std;
 
 int main()
 {
+	sort_recent();
+	return 1;
     while (n_obj<N_OF_OBJECTS) {
 		// We need a main loop in here where cpu is being creative
 		// E.g it combines or generates 3 new object with links
 		// Afterwards if we approve, it stores, else disregards
-		
-		if (n_obj>4) {
+		printf("nobj %d\n", n_obj);
+		if (n_obj>3) {
 			// main_loop_here()
 			// Go to drawing conclusions
+			sort_recent();
 		}
 		
 		
@@ -123,6 +126,49 @@ void create_object(char * arr) {
 
 
 void sort_recent() {
+	LearnNew tmpobj[6];
+	int recarr[6];
+	int rectmp[6];
+	
+	n_obj = 6;
+	int objrec[6] = {9, 8, 2, 1, 6, 7};
+	int ind[6] = {0, 1, 2, 3, 4, 5};
+	
+	for (int k=0; k<6;k++) {
+		recarr[k] = objrec[k];
+		rectmp[k] = objrec[k];
+		printf("init %d, %d, %d\n", recarr[k], rectmp[k], objrec[k]);
+	}
+	
+	
+	for (int k=0; k<6;k++) {
+		
+		printf("just print %d, %d, %d\n", recarr[k], rectmp[k], objrec[k]);
+	}
+	printf(" \n");
+	for (int kk=0; kk<n_obj-1;kk++) {
+		for (int k=0; k<n_obj-1;k++) {
+			int t1 = rectmp[k];
+			
+			for (int j=k+1; j<n_obj;j++) {
+				int t2 = rectmp[j];
+				
+				if (t1>t2) {
+					rectmp[k] = t2;
+					rectmp[j] = t1;
+					
+					printf("k %d , j %d , t1 %d , t2 %d\n", k, j, t1, t2);
+					k++;
+				}
+				
+				
+			}
+		}
+	}
+	for (int k=0; k<6;k++) {
+		
+		printf("post just print %d, %d, %d\n", recarr[k], rectmp[k], objrec[k]);
+	}
 	
 }
 
