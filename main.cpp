@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+
 
 #include "main.h"
 
@@ -111,8 +113,7 @@ void create_object(char * arr) {
 		
 		// Mark it alive
 		obj[i].is_alive = 1;
-		obj[i].rec?=P_AT_CREATION;
-		
+		obj[i].rec+=P_AT_CREATION;		
 		// N of objects
 		n_obj++;
 	}
