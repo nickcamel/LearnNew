@@ -20,7 +20,7 @@ int main()
 		if (n_obj>3) {
 			// main_loop_here()
 			// Go to drawing conclusions
-			sort_recent();
+			
 		}
 		
 		
@@ -59,6 +59,7 @@ int main()
 				
 		if (obj[i].learn_new_stuff(attr_tmp, 1)==0) {
 			
+			obj[i].rec+=P_AT_LEARNING;
 			create_object(attr_tmp);
 			
 			obj[i].learn_new_stuff(arr, 0);
@@ -66,19 +67,23 @@ int main()
 			
 		} else {
 			// We didnt learn anything new
-			// Just print the object
-			obj[i].print_all_knowledge();
+			// User just wants to read
+			int dev = 0;
+			//obj[i].print_all_knowledge(&dev);
 			obj[i].rec+=P_AT_READING;
 			
 		}
 		
+		if (n_obj>1)
+			sort_recent();
 		
 		// DEV
-		if (n_obj%4==0) {
+		if (n_obj>0) {
 			// Every once in while, print everything
 			// but here we dont add points since it's for dev
 			for (int k=0; k<n_obj; k++) {
-				obj[k].print_all_knowledge();
+				int dev = 1;
+				obj[k].print_all_knowledge(&dev);
 			}
 		}
     }

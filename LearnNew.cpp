@@ -73,17 +73,20 @@ int LearnNew::learn_new_stuff(char *ret_char, int usr_in) {
 }
 
 
-void LearnNew::print_all_knowledge() {
+void LearnNew::print_all_knowledge(int * dev) {
 
     LearnNew::MyProps * other;
     other = props;
 
     if (other!=NULL) {
-        printf("\n--- %s ---\n", name);
+        printf("\n--- %s %d---\n", name, rec);
 
         while (other->next!=NULL) {
-            printf("%s\n", other->attr);
-			other->rec+=P_AT_READING;
+            printf("%s %d\n", other->attr, other->rec);
+			
+			if (*dev!=1)
+				other->rec+=P_AT_READING;
+				
             other = other->next;
 
         }

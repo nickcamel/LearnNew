@@ -11,7 +11,7 @@ public:
     virtual ~LearnNew();
 
     int learn_new_stuff(char*, int);
-    void print_all_knowledge();
+    void print_all_knowledge(int * dev);
 
     char name[N_CHAR_MAX];
 
