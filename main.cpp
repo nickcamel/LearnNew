@@ -1,18 +1,70 @@
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
-#include <algorithm>
-
+//#include <algorithm>
+#include <signal.h>
+#include <unistd.h>
 
 #include "main.h"
 
 
 using namespace std;
 
+
 int main()
 {
+	// http://stackoverflow.com/questions/1641182/how-can-i-catch-a-ctrl-c-event-c
+	// this works well.. but need to investigate when returning from handler...?
+	sigIntHandler.sa_handler = handle_ui;
+	sigemptyset(&sigIntHandler.sa_mask);
+	sigIntHandler.sa_flags = 0;	
+	sigaction(SIGINT, &sigIntHandler, NULL);
 	
-    while (n_obj<N_OF_OBJECTS) {
+	
+	gettimeofday(&tic, NULL);
+	
+	while ( true ) {
+		gettimeofday(&toc, NULL);
+		
+		
+		if ( ( (toc.tv_sec-tic.tv_sec) >= 1 ) && ( (toc.tv_sec-tic.tv_sec) < 2) )
+			printf("time has passed 1\n");
+		if ( (toc.tv_sec-tic.tv_sec >= 2 ) && (toc.tv_sec-tic.tv_sec < 3) )
+			printf("time has passed 2\n");
+		if ( (toc.tv_sec-tic.tv_sec >= 3 ) && (toc.tv_sec-tic.tv_sec < 4) )
+			printf("time has passed 3\n");
+		if ( (toc.tv_sec-tic.tv_sec >= 4 ) && (toc.tv_sec-tic.tv_sec < 5) )
+			printf("time has passed 4\n");
+		if ( ( (toc.tv_sec-tic.tv_sec) >= 5 ) && ( (toc.tv_sec-tic.tv_sec) < 6 ) )
+			printf("time has passed 5\n");
+	
+		if (toc.tv_sec-tic.tv_sec > 5) {
+			
+			gettimeofday(&tic, NULL);
+			
+			
+			if (n_obj>=N_OF_OBJECTS) {
+				
+				printf("Out of memory!\n");
+				printf("Max number of objects exceeded\n");
+				printf("Allowed %d  Created %d\n", N_OF_OBJECTS, n_obj);
+				break;
+			}
+		}
+		
+	
+	}   
+	
+	
+    return 0;
+}
+
+void handle_ui(int s) {
+	
+	// Erase "^C"
+	cout << "\b\b";
+	
+	if (n_obj<N_OF_OBJECTS) {
 		// We need a main loop in here where cpu is being creative
 		// E.g it combines or generates 3 new object with links
 		// Afterwards if we approve, it stores, else disregards
@@ -45,8 +97,7 @@ int main()
 		//cout << "devtest end"<<endl;
 		//printf("\n");
 		
-		// Check if object exist.
-		// We dont want to create a duplicate!
+		// Create the inputted object
 		create_object(arr);
 		
         // Learn new stuff about object.
@@ -59,16 +110,18 @@ int main()
 				
 		if (obj[i].learn_new_stuff(attr_tmp, 1)==0) {
 			
+			// add learning points
 			obj[i].rec+=P_AT_LEARNING;
 			create_object(attr_tmp);
 			
 			obj[i].learn_new_stuff(arr, 0);
+			// add learning points
 			obj[i].rec+=P_AT_LEARNING;
 			
 		} else {
 			// We didnt learn anything new
 			// User just wants to read
-			int dev = 0;
+			//int dev = 0;
 			//obj[i].print_all_knowledge(&dev);
 			obj[i].rec+=P_AT_READING;
 			
@@ -87,11 +140,6 @@ int main()
 			}
 		}
     }
-	
-	cout << "Out of memory!" << endl;
-	printf("Max number of objects exceeded\n");
-	printf("Allowed %d  Created %d\n", N_OF_OBJECTS, n_obj);
-    return 0;
 }
 
 
@@ -128,6 +176,7 @@ void create_object(char * arr) {
 		
 		// Mark it alive
 		obj[i].is_alive = 1;
+		// add creation points
 		obj[i].rec+=P_AT_CREATION;		
 		// N of objects
 		n_obj++;
