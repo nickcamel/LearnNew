@@ -11,13 +11,12 @@ using namespace std;
 
 int main()
 {
-	sort_recent();
-	return 1;
+	
     while (n_obj<N_OF_OBJECTS) {
 		// We need a main loop in here where cpu is being creative
 		// E.g it combines or generates 3 new object with links
 		// Afterwards if we approve, it stores, else disregards
-		printf("nobj %d\n", n_obj);
+		
 		if (n_obj>3) {
 			// main_loop_here()
 			// Go to drawing conclusions
@@ -74,6 +73,14 @@ int main()
 		}
 		
 		
+		// DEV
+		if (n_obj%4==0) {
+			// Every once in while, print everything
+			// but here we dont add points since it's for dev
+			for (int k=0; k<n_obj; k++) {
+				obj[k].print_all_knowledge();
+			}
+		}
     }
 	
 	cout << "Out of memory!" << endl;
@@ -126,38 +133,50 @@ void create_object(char * arr) {
 
 
 void sort_recent() {
-	LearnNew tmpobj[6];
-	int recarr[6];
-	int rectmp[6];
+	//In this method we sort our object according to their priority
 	
-	n_obj = 6;
-	int objrec[6] = {9, 8, 2, 1, 6, 7};
-	int ind[6] = {0, 1, 2, 3, 4, 5};
-	
-	for (int k=0; k<6;k++) {
-		recarr[k] = objrec[k];
-		rectmp[k] = objrec[k];
-		printf("init %d, %d, %d\n", recarr[k], rectmp[k], objrec[k]);
+	/*
+	printf("name prio pre \n");
+	for (int k=0; k<n_obj;k++) {
+		printf("%6s %d\n", obj[k].name, obj[k].rec);
 	}
+	*/
 	
-	
-	for (int k=0; k<6;k++) {
-		
-		printf("just print %d, %d, %d\n", recarr[k], rectmp[k], objrec[k]);
-	}
-	printf(" \n");
-	for (int kk=0; kk<n_obj-1;kk++) {
-		for (int k=0; k<n_obj-1;k++) {
-			int t1 = rectmp[k];
+	// Sort descending
+	for (int kk=n_obj-1; kk>0;kk--) {
+		for (int k=n_obj-1; k>0;k--) {
+			int t1 = obj[k].rec;
 			
-			for (int j=k+1; j<n_obj;j++) {
-				int t2 = rectmp[j];
+			for (int j=k-1; j>=0;j--) {
+				int t2 = obj[j].rec;
 				
 				if (t1>t2) {
-					rectmp[k] = t2;
-					rectmp[j] = t1;
+					LearnNew ttmp = obj[k];
+					obj[k] = obj[j];
+					obj[j] = ttmp;
 					
-					printf("k %d , j %d , t1 %d , t2 %d\n", k, j, t1, t2);
+					k--;
+				}
+				
+				
+			}
+		}
+	}
+	
+	// Sort ascending
+	/*
+	for (int kk=0; kk<n_obj-1;kk++) {
+		for (int k=0; k<n_obj-1;k++) {
+			int t1 = obj[k].rec;
+			
+			for (int j=k+1; j<n_obj;j++) {
+				int t2 = obj[j].rec;
+				
+				if (t1>t2) {
+					LearnNew ttmp = obj[k];
+					obj[k] = obj[j];
+					obj[j] = ttmp;
+					
 					k++;
 				}
 				
@@ -165,10 +184,14 @@ void sort_recent() {
 			}
 		}
 	}
-	for (int k=0; k<6;k++) {
-		
-		printf("post just print %d, %d, %d\n", recarr[k], rectmp[k], objrec[k]);
+	*/
+	
+	/*
+	printf("name prio post \n");
+	for (int k=0; k<n_obj;k++) {
+		printf("%6s %6d\n", obj[k].name, obj[k].rec);
 	}
+	*/
 	
 }
 
