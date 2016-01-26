@@ -32,12 +32,18 @@ int main()
 		// the objects it has stored. Say every T_CREATIVE_SEC seconds and if
 		// number of object are greater than T_CREATIVE_N
 		
+		// 1. We need to start 'forgetting'. Removing points
+		// 2. We need to start making connections.
+		//    sun->fire. fire->burns. sun->burns?
+		
 		// Get current time
 		gettimeofday(&toc, NULL);
 		
 		// Check condition
 		if ( ( ((toc.tv_sec-tic.tv_sec)%T_CREATIVE_SEC)>=T_CREATIVE_SEC ) && 
 				( n_obj>T_CREATIVE_N ) )  {
+			
+			// do something here
 			
 			// If condition is true, set new initial time
 			gettimeofday(&tic, NULL);

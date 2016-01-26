@@ -51,9 +51,16 @@ int LearnNew::learn_new_stuff(char *ret_char, int usr_in) {
 	// If enter key or space key was pressed, don't learn it, move on...
 	if (arr[0]!=0 && arr[0]!=32) {
 		
-		// Move pointer to end
+		// Move pointer to end, while checking that attribute doesn't already exist.
 		while (other->next!=NULL) {
-			other = other->next;
+			if (strcmp(other->attr, arr)!=0) {
+				other = other->next;
+			} else {
+				// We didn't learn a new attribute, but encountered an already known one.
+				// Surely this adds some points
+				other->rec+=P_AT_READING;
+				return 1;
+			}
 		}
 		
 		// We need to copy for the pointer to hold when returning.
