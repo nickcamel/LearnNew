@@ -6,5 +6,7 @@
 #define P_AT_READING 1
 #define P_AT_LEARNING 3
 #define P_AT_CREATION 3
+#define T_CREATIVE_SEC 5
+#define T_CREATIVE_N 3
 
 #endif // DEFINES_H_INCLUDED

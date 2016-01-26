@@ -13,43 +13,37 @@ using namespace std;
 
 int main()
 {
-	// http://stackoverflow.com/questions/1641182/how-can-i-catch-a-ctrl-c-event-c
-	// this works well.. but need to investigate when returning from handler...?
+	
+	// http://stackoverflow.com/questions/1641182/how-can-i-catch-a-ctrl-c-event-c	
 	sigIntHandler.sa_handler = handle_ui;
 	sigemptyset(&sigIntHandler.sa_mask);
 	sigIntHandler.sa_flags = 0;	
 	sigaction(SIGINT, &sigIntHandler, NULL);
 	
-	
+	// Get initial time
 	gettimeofday(&tic, NULL);
 	
+	
 	while ( true ) {
+		
+		// This is our main loop.
+		// It is interrupted by pressing 'ctrl+c'.
+		// It will every once in a while be creative and do something with
+		// the objects it has stored. Say every T_CREATIVE_SEC seconds and if
+		// number of object are greater than T_CREATIVE_N
+		
+		// Get current time
 		gettimeofday(&toc, NULL);
 		
-		
-		if ( ( (toc.tv_sec-tic.tv_sec) >= 1 ) && ( (toc.tv_sec-tic.tv_sec) < 2) )
-			printf("time has passed 1\n");
-		if ( (toc.tv_sec-tic.tv_sec >= 2 ) && (toc.tv_sec-tic.tv_sec < 3) )
-			printf("time has passed 2\n");
-		if ( (toc.tv_sec-tic.tv_sec >= 3 ) && (toc.tv_sec-tic.tv_sec < 4) )
-			printf("time has passed 3\n");
-		if ( (toc.tv_sec-tic.tv_sec >= 4 ) && (toc.tv_sec-tic.tv_sec < 5) )
-			printf("time has passed 4\n");
-		if ( ( (toc.tv_sec-tic.tv_sec) >= 5 ) && ( (toc.tv_sec-tic.tv_sec) < 6 ) )
-			printf("time has passed 5\n");
-	
-		if (toc.tv_sec-tic.tv_sec > 5) {
+		// Check condition
+		if ( ( ((toc.tv_sec-tic.tv_sec)%T_CREATIVE_SEC)>=T_CREATIVE_SEC ) && 
+				( n_obj>T_CREATIVE_N ) )  {
 			
+			// If condition is true, set new initial time
 			gettimeofday(&tic, NULL);
 			
 			
-			if (n_obj>=N_OF_OBJECTS) {
-				
-				printf("Out of memory!\n");
-				printf("Max number of objects exceeded\n");
-				printf("Allowed %d  Created %d\n", N_OF_OBJECTS, n_obj);
-				break;
-			}
+			
 		}
 		
 	
@@ -64,20 +58,10 @@ void handle_ui(int s) {
 	// Erase "^C"
 	cout << "\b\b";
 	
-	if (n_obj<N_OF_OBJECTS) {
-		// We need a main loop in here where cpu is being creative
-		// E.g it combines or generates 3 new object with links
-		// Afterwards if we approve, it stores, else disregards
+	
+	
+	if (n_obj<N_OF_OBJECTS-1) {
 		
-		if (n_obj>3) {
-			// main_loop_here()
-			// Go to drawing conclusions
-			
-		}
-		
-		
-		// When ready for user input
-		// go to here
 		
         // Get object name
         char arr[N_CHAR_MAX];
@@ -139,7 +123,28 @@ void handle_ui(int s) {
 				obj[k].print_all_knowledge(&dev);
 			}
 		}
-    }
+    } else {
+		// Cannot create more objects just print
+		printf("\n\n");
+		if (n_obj>0) {
+			// Every once in while, print everything
+			// but here we dont add points since it's for dev
+			for (int k=0; k<n_obj; k++) {
+				int dev = 1;
+				obj[k].print_all_knowledge(&dev);
+			}
+		}
+		
+		printf("\nOut of memory!\n");
+		printf("Max number of objects reached\n");
+		printf("Allowed %d  Created %d\n", N_OF_OBJECTS, n_obj);
+		if (n_obj<N_OF_OBJECTS) {
+			printf("Yes, I know there are less objects than allowed, \nbut creating a new object will also create it's attribute\nNo point in arguing about that you maybe only want to ADD an attribute, \nI'm not handling it. Just edit defines.h\n");
+			printf("Yes, your session will get lost!\n");
+		}
+		
+	
+	}
 }
 
 

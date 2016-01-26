@@ -8,7 +8,8 @@
 
 
 // Declare an array of object to learn
-LearnNew obj[N_OF_OBJECTS];
+class sigaction;
+LearnNew obj[N_OF_OBJECTS+1];
 char arrint[5000][5000];
 
 
