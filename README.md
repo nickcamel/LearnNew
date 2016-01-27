@@ -1,14 +1,17 @@
 # LearnNew
-Dynamically create new objects with attributes
+Create new objects with attributes
 
-First, enter a name for the object (press enter)
+We have a main-loop which is interrupted by user by pressing 'ctrl-c'
+
+Now, enter a name for the object (press enter)
+
 Then, enter an attribute for the object (press enter)
+OR
+leave the attribute blank (press enter). This will print the object
 
-Enter a second named (press enter)
-Then, enter an attribute (press enter)
 
 If you want to add an attribute to an object, 
-First, type in the object name (press enter)
+First, type in the name of the already existing object (press enter)
 Then, type in an additional attribute (press enter)
 
 
