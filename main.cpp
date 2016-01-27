@@ -23,7 +23,10 @@ int main()
 	// Get initial time
 	gettimeofday(&tic, NULL);
 	
-	
+	// We may implement a self searching algorithm soon so that we don't depend ENTIRELY on user.
+	// e.g through 
+	// wget --user-agent=Mozilla/5.0 -O srch -e robots=off "http://www.google.com/search?hl=en&q=foo"
+		
 	while ( true ) {
 		
 		// This is our main loop.
