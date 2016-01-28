@@ -39,14 +39,26 @@ int main()
 		// 2. We need to start making connections.
 		//    sun->fire. fire->burns. sun->burns?
 		
+		
 		// Get current time
 		gettimeofday(&toc, NULL);
 		
 		// Check condition
-		if ( ( ((toc.tv_sec-tic.tv_sec)%T_CREATIVE_SEC)>=T_CREATIVE_SEC ) && 
+		if ( ( (toc.tv_sec-tic.tv_sec)>=T_CREATIVE_SEC ) && 
 				( n_obj>T_CREATIVE_N ) )  {
 			
+			printf("...");
+			fflush(stdout);
+			
 			// do something here
+			if (do_loop==true) {
+				
+				do_loop = false; // do this as soon as possible
+				printf("\n");
+				
+				loop_to_connect();
+				
+			}
 			
 			// If condition is true, set new initial time
 			gettimeofday(&tic, NULL);
@@ -62,12 +74,37 @@ int main()
     return 0;
 }
 
+void loop_to_connect() {
+	printf("----- DEV -----\n");
+	struct LearnNew::MyProps * other;
+	struct LearnNew::MyProps * theother;
+	for (int k=0; k<n_obj; k++) {
+		char name[N_CHAR_MAX];
+		strcpy(name, obj[k].name);
+		
+		other = obj[k].props;
+		while (other->next!=NULL) {
+			for (int l=0; l<n_obj; l++) {
+				if (strcmp(other->attr, obj[l].name)==0) {
+					theother = obj[l].props;
+					while (theother->next!=NULL) {
+						printf("%s ?= %s\n", obj[k].name, theother->attr);
+						theother = theother->next;
+					}
+				}
+			
+			}
+		 other = other->next;
+		}
+		
+	}
+}
 void handle_ui(int s) {
 	
 	// Erase "^C"
-	cout << "\b\b";
-	
-	
+	//cout << "\b\b";
+	//cout << "  " <<endl;
+	printf("\b\b  \n");
 	
 	if (n_obj<N_OF_OBJECTS-1) {
 		
@@ -110,6 +147,8 @@ void handle_ui(int s) {
 			obj[i].learn_new_stuff(arr, 0);
 			// add learning points
 			obj[i].rec+=P_AT_LEARNING;
+			
+			do_loop = true;
 			
 		} else {
 			// We didnt learn anything new
@@ -265,6 +304,9 @@ void sort_recent() {
 
 
 int c2i(char * charint) {
+	// This is a method not yet implemented.
+	// Idea is to create objects in the array, not by implicit indexing obj[i], obj[i+1], but 
+	// rather by char-name obj["car"], obj["sun"]
 	int ci = 0;
 	for (unsigned int k = 0; k<strlen(charint); k++) {
 		ci += (int) charint[k];

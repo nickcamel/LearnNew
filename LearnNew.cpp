@@ -31,7 +31,7 @@ void LearnNew::learn(char * newAttr, MyProps * in_thing) {
 int LearnNew::learn_new_stuff(char *ret_char, int usr_in) {
 	
 	// Create a pointer for iteration purpose
-    LearnNew::MyProps * other;
+    MyProps * other;
 	other = props;
 	
 	// Char array for user input
