@@ -23,7 +23,7 @@ sed -n 's/\"'"$foo$addsep"'/\n\"'"$foo$addsep"'/gpw '$fileNew'' $file
 printf "\n\nreplace done\n\n"
 
 # now grep $foo
-more $fileNew | grep -Po '(?<=\"'"$foo$addsep"').*(?=\")'
+more $fileNew | grep -Po '(?<=\"'"$foo$addsep"').*(?=\")' | tee $fileNew
 
 # works without addsep
 # more $fileNew | grep -Po '(?<=\"'$foo' ).*(?=\")'
